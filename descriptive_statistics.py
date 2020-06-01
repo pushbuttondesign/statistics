@@ -45,7 +45,7 @@ x = np.linspace(0, size, num=size);
 #plot histogram
 plt.figure();
 bins = 20; #choose between 5 and 20 bins depending on dataset size
-plt.hist(y, bins);
+plt.hist(y, bins, color='black');
 plt.title("Histogram");
 plt.xlabel("Data Reading Number (Counts)");
 plt.ylabel("Frequency (Counts)");
@@ -56,7 +56,7 @@ norm_y = [(i - np.min(y)) / (np.max(y) - np.min(y)) for i in y];
 
 #plot scatter graph
 plt.figure();
-plt.scatter(x, norm_y);
+plt.scatter(x, norm_y, color='black');
 plt.title("Values over Time to Identify Outliers");
 plt.xlabel("Data Reading (Time)");
 plt.ylabel("0-1 Normalised Value");
@@ -77,7 +77,7 @@ con_inter = stats.bayes_mvs(y, alpha=0.95); #95% confidence interval for mean, v
 
 #plot z scores scatter graph
 plt.figure();
-plt.scatter(x, z_score);
+plt.scatter(x, z_score, color='black');
 plt.title("Z-Scores of Data Points");
 plt.xlabel("Data Reading (Time)");
 plt.ylabel("Z-Score");
