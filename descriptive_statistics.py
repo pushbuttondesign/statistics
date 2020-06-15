@@ -19,7 +19,8 @@ Descriptive statistics describe the basic features of a dataset in order to esta
     - Mean (sum / count, skued by outliers so for normaly distributed data only)
     - Median (middle value, less skued by outliers)
     - Mode (most frequent values, sutable for discrete data or heavily skued bimodal data)
-    - Confidence Interval Estimate (range within which the population truth is estimated to lie with a given probability)
+    - Margin of Error (maximum expected difference between the true population parameter and a sample estimate of that parameter)
+    - Confidence Interval (range within which the population truth is estimated to lie with a given probability)
     - Range (the difference between smallest and largest values)
     - Inter quatile range (range of the middle 50% datapoints)
     - Standard deviation (average distance that each data point is from the mean. Only valid for normal data)
@@ -84,17 +85,27 @@ plt.ylabel("Z-Score");
 plt.grid(True);
 
 #print descriptive statistics
-print("-------------------------------------");
-print("|       DESCRIPTIVE  STATISTICS      |");
-print("|  qty of data: {:+d}                |".format(len));
-print("|         mean: {:+4.3f}               |".format(mean));
-print("| mean c.inter: {:+4.3f}               |".format(con_inter[0][1][1] - con_inter[0][1][0]));
-print("|       median: {:+4.3f}               |".format(median));
-print("|         mode: {:+4.3f} (count: {:d})    |".format(mode, mode_count));
-print("|        range: {:+4.3f}               |".format(range));
-print("|     iq range: {:+4.3f}               |".format(iqrange));
-print("|      std dev: {:+4.3f}               |".format(std_dev));
-print("|      std err: {:+4.3f}               |".format(std_dev));
-print("-------------------------------------");
+print("----------------------------------------");
+print("|        DESCRIPTIVE  STATISTICS       |");
+print("|        -----------------------       |");
+print("|    qty of data: {:+d}                |".format(len));
+print("|           mean: {:+4.3f}               |".format(mean));
+print("| moe @ 95% conf: +\\-{:4.3f}             |".format((con_inter[0][1][1] - con_inter[0][1][0]) / 2));
+print("| 95% conf inter: {:+4.3f}<p<{:+4.3f}      |".format(con_inter[0][1][0], con_inter[0][1][1]));
+print("|         median: {:+4.3f}               |".format(median));
+print("|           mode: {:+4.3f} (count: {:d})    |".format(mode, mode_count));
+print("|          range: {:+4.3f}               |".format(range));
+print("|       IQ range: {:+4.3f}               |".format(iqrange));
+print("|        std dev: {:+4.3f}               |".format(std_dev));
+print("|        std err: {:+4.3f}               |".format(std_dev));
+print("----------------------------------------");
+
+#plot boxplot
+plt.figure();
+plt.boxplot(y);
+plt.title("BoxPlot");
+plt.xlabel("Data Set");
+plt.ylabel("Value (Original Units)");
+plt.grid(True);
 
 plt.show();
